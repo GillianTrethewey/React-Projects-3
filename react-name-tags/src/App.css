@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+.channel-chat {
+  display: flex;
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}

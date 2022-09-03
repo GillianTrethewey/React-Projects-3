@@ -4,6 +4,11 @@ import './App.css';
 import Board from './components/Board'
 import data from './sampleData'
 import Home from './components/pages/Home'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import PageNotFound from './components/pages/PageNotFound'
+import { boardsRef, } from './firebase'
+
+
 
 class App extends React.Component {
   state = {
@@ -14,17 +19,23 @@ class App extends React.Component {
   }
 
   createNewBoard = board => {
-    this.setState({ boards:[...this.state.boards, board] })
+    const newBoard = boardsRef
+    this.setState({ boards: [...this.state.boards, board] })
   }
   
   render() {
     return (
       <div>
-        <Home 
-          boards={this.state.boards} 
-          createNewBoard={this.createNewBoard} 
-        /> 
-        <Board />      
+        <BrowserRouter>
+          <Routes>
+            <Route exact path="/" element={ <Home
+                  boards={this.state.boards}
+                  createNewBoard={this.createNewBoard} />
+          } ></Route>
+            <Route path="/board" element={<Board />} ></Route>
+            <Route element={PageNotFound} ></Route>
+          </Routes>
+        </BrowserRouter>
       </div>
     );
   }
